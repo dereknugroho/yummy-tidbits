@@ -61,31 +61,34 @@ static int	is_space(char c)
 // Count the number of words in a string
 static int	word_count(char *s)
 {
-	int	count;
+	int	count = 0;
+	int	i = 0;
 
-	count = 0;
-	while (*s)
+	while (s[i])
 	{
-		if (is_space(*s))
-			s++;
+		if (is_space(s[i]))
+			i++;
 		else
 		{
 			count++;
-			while (*s && !is_space(*s))
-				s++;
+			while (s[i] && !is_space(s[i]))
+				i++;
 		}
 	}
 	return (count);
 }
 
 // Create a 2-d array that consists of the words in the given string
-char		**split_whitespace(char *s)
+static char	**split_whitespace(char *s)
 {
 	int		i = 0;
 	int		j = 0;
 	int		k;
-	int		word_len = 0;
+	int		temp = 0;
+	int		word_len;
 	char	**r;
+
+	// Handle edge case where s is an empty string or entirely consisting of whitespace
 
 	// Allocate memory for parent array
 	if (!(r = (char **)malloc(sizeof(char *) * (word_count(s) + 1))))
@@ -94,16 +97,21 @@ char		**split_whitespace(char *s)
 	// Execute this block for each word in the string, for the entire string
 	while (s[i] && j < word_count(s))
 	{
-		
+		// Reset length of word with each iteration
+		word_len = 0;
+
 		// Go to the beginning of the next word in the string
 		while (s[i] && is_space(s[i]))
+		{
 			i++;
+			temp++;
+		}
 
 		// Determine the length of the newly-encountered word
 		while (s[i] && !is_space(s[i]))
 		{
-			word_len++;
 			i++;
+			word_len++;
 		}
 
 		// Allocate memory for child array
@@ -112,14 +120,10 @@ char		**split_whitespace(char *s)
 		
 		// Set specific value for each allocated byte in the child array
 		k = 0;
-		while (word_len)
-		{
-			r[j][k] = s[i - word_len];
-			k++;
-			word_len--;
-		}
-		r[j][k] = '\0';
-		
+		while (temp < i)
+			r[j][k++] = s[temp++];
+		r[j][k] = 0;
+			
 		// Go to the next element in the parent array
 		j++;
 	}
@@ -131,7 +135,7 @@ char		**split_whitespace(char *s)
 	return (r);
 }
 
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	// Handle errors
 	if (ac != 2)
@@ -143,13 +147,21 @@ int		main(int ac, char **av)
 	// Organize variables
 	char	**str = split_whitespace(av[1]);
 	int		i = 0;
+	size_t	j = 0;
 
 	// Display info to user
-	printf("Your original string: %s\n", av[1]);
-	while (i <= word_count(av[1]))
+	printf("Your original string: %s\n\n", av[1]);
+	while (i < word_count(av[1]))
 	{
-		printf("Word at index %d: %s\n", i, str[i]);
+		printf("Word at str[%d]: %s\n", i, str[i]);
+		j = 0;
+		while (j <= strlen(str[i]))
+		{
+			printf("Char at str[%d][%zu]: %c (ascii %d)\n", i, j, str[i][j], str[i][j]);
+			j++;
+		}
 		i++;
+		printf("\n");
 	}
 
 	// Ensure no leaks before ending program
