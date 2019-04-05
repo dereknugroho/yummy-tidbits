@@ -147,7 +147,7 @@ int			main(int ac, char **av)
 	// Organize variables
 	char	**str = split_whitespace(av[1]);
 	int		i = 0;
-	size_t	j = 0;
+	size_t	j;
 
 	// Display info to user
 	printf("Your original string: %s\n\n", av[1]);
