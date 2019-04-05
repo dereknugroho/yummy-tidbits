@@ -21,11 +21,11 @@ $
 ##################################################################
 
 Restrictions:
-- Program takes two ints:
+ - The program takes two ints:
 	1) A base-10 value
 	2) Any base between 2 and 16 (inclusive)
-- A negative sign is present only for negative base-10 values
-- Negative values for all other bases are treated as unsigned
+ - A negative sign is present only for negative base-10 values
+ - Negative values for all other bases are treated as unsigned
 
 ##################################################################
 
