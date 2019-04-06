@@ -46,7 +46,7 @@ char	*itoa_base(int value, int base)
 	if (base < 2 || base > 16)
 	{
 		printf("Invalid base! Terminating program.\n");
-		exit(0);
+		exit(1);
 	}
 	if (value == 0)
 	{
@@ -92,7 +92,7 @@ int		main(int ac, char **av)
 	if (ac != 3)
 	{
 		printf("Invalid number of arguments! Terminating program.\n");
-		return (0);
+		exit(1);
 	}
 
 	// Organize variables

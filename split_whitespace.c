@@ -89,6 +89,11 @@ static char	**split_whitespace(char *s)
 	char	**r;
 
 	// Handle edge case where s is an empty string or entirely consisting of whitespace
+	if (!s || !*s)
+	{
+		printf("Invalid string! Terminating program.\n");
+		exit(1);
+	}
 
 	// Allocate memory for parent array
 	if (!(r = (char **)malloc(sizeof(char *) * (word_count(s) + 1))))
@@ -141,7 +146,7 @@ int			main(int ac, char **av)
 	if (ac != 2)
 	{
 		printf("Invalid number of arguments! Terminating program.\n");
-		return (0);
+		exit(1);
 	}
 
 	// Organize variables
@@ -150,7 +155,14 @@ int			main(int ac, char **av)
 	size_t	j;
 
 	// Display info to user
-	printf("Your original string: %s\n\n", av[1]);
+	printf("Your original string:\n\n");
+	while (i < word_count(av[1]))
+	{
+		printf("%s\n", str[i]);
+		i++;
+	}
+	i = 0;
+	printf("\n");
 	while (i < word_count(av[1]))
 	{
 		printf("Word at str[%d]: %s\n", i, str[i]);
