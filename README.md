@@ -15,6 +15,6 @@ $ gcc -Wall -Wextra -Werror filename.c
 $ ./a.out arg1 [...] | cat -e
 ```
 
-These programs contain rough solutions to various Level 3+ exam questions at [42 SV](https://www.42.us.org/).
+These programs contain approximate solutions to various Level 3+ exam questions at [42 SV](https://www.42.us.org/).
 
 Please raise an issue if you see something incorrect!
