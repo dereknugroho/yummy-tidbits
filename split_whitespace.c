@@ -1,6 +1,6 @@
 /*
 
-#################################################################################
+################################################################################
 
 This is a program that takes a string and saves an array of its words. The
 words are then displayed to the standard output. A word is a series of
@@ -25,26 +25,21 @@ This
 is
 fun
 
-#################################################################################
+################################################################################
 
 Usage:
 
 $ gcc -Wall -Wextra -Werror split_whitespace.c
-$ ./a.out "This is fun" | cat -e
-$ This
-  is
-  fun
-$
+$ ./a.out "This is fun"
 
-#################################################################################
+################################################################################
 
 Restrictions:
-	- Program takes a single string
-	- Some non-alphanumeric characters need to be escaped (e.g. "\! \!")
-		- After execution, may encounter dquote> on the command line.
-		  Just type a double quote and hit Enter
+	- The program takes a single string, and must be given in double quotes,
+	  otherwise there may be undefined behaviour (see usage)
+	- The following characters must be escaped: (", \, !)
 
-#################################################################################
+################################################################################
 
 */
 
@@ -52,7 +47,54 @@ Restrictions:
 #include <stdlib.h>
 #include <string.h>
 
-// Determine if a character is a whitespace character
+static int	is_space(char c);
+static int	word_count(char *s);
+static char	**split_whitespace(char *s);
+
+int			main(int ac, char **av)
+{
+	// Handle errors
+	if (ac != 2)
+	{
+		printf("Invalid number of arguments! Terminating program.\n");
+		exit(1);
+	}
+
+	// Organize variables
+	char	**str = split_whitespace(av[1]);
+	int		i = 0;
+	size_t	j;
+
+	// Display info to user
+	printf("Your original string:\n\n");
+	while (i < word_count(av[1]))
+	{
+		printf("%s\n", str[i]);
+		i++;
+	}
+	i = 0;
+	printf("\n");
+	while (i < word_count(av[1]))
+	{
+		printf("Word at str[%d]: %s\n", i, str[i]);
+		j = 0;
+		while (j <= strlen(str[i]))
+		{
+			printf("Char at str[%d][%zu]: %c (ascii %d)\n", i, j, str[i][j],
+				str[i][j]);
+			j++;
+		}
+		i++;
+		printf("\n");
+	}
+
+	// Ensure no leaks before ending program
+	free(str);
+	str = NULL;
+	return (0);
+}
+
+// Determine if a character is whitespace
 static int	is_space(char c)
 {
 	return (c == ' ' || (c >= 9 && c <= 13));
@@ -88,7 +130,7 @@ static char	**split_whitespace(char *s)
 	int		word_len;
 	char	**r;
 
-	// Handle edge case where s is an empty string or entirely consisting of whitespace
+	// Handle edge case where s is an empty string or only whitespace
 	if (!s || !*s)
 	{
 		printf("Invalid string! Terminating program.\n");
@@ -138,46 +180,4 @@ static char	**split_whitespace(char *s)
 
 	// Return the 2-d array
 	return (r);
-}
-
-int			main(int ac, char **av)
-{
-	// Handle errors
-	if (ac != 2)
-	{
-		printf("Invalid number of arguments! Terminating program.\n");
-		exit(1);
-	}
-
-	// Organize variables
-	char	**str = split_whitespace(av[1]);
-	int		i = 0;
-	size_t	j;
-
-	// Display info to user
-	printf("Your original string:\n\n");
-	while (i < word_count(av[1]))
-	{
-		printf("%s\n", str[i]);
-		i++;
-	}
-	i = 0;
-	printf("\n");
-	while (i < word_count(av[1]))
-	{
-		printf("Word at str[%d]: %s\n", i, str[i]);
-		j = 0;
-		while (j <= strlen(str[i]))
-		{
-			printf("Char at str[%d][%zu]: %c (ascii %d)\n", i, j, str[i][j], str[i][j]);
-			j++;
-		}
-		i++;
-		printf("\n");
-	}
-
-	// Ensure no leaks before ending program
-	free(str);
-	str = NULL;
-	return (0);
 }
