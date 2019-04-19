@@ -7,7 +7,7 @@ the program outputs the value in terms of the specified base.
 
 For example:
 
-If value is 93126 and base is 16, the program will output 16BC6
+If value is 93126 and base is 16, the program will output 16bc6
 
 ################################################################################
 
@@ -23,9 +23,9 @@ Restrictions:
 Usage:
 $ gcc -Wall -Wextra -Werror itoa_base.c
 $ ./a.out 93126 16
-$ Your value (base-10): 93126
+  Your value (base-10): 93126
   Your base: 16
-  Your final value (base-16): 16BC6
+  Your final value (base-16): 16bc6
 $
 
 ################################################################################
@@ -116,7 +116,7 @@ static char	*itoa_base(int value, int base)
 	while (bytes--)
 	{
 		ret[bytes] = (num % base < 10) ? num % base + '0' :
-			num % base + 'A' - 10;
+			num % base + 'a' - 10;
 		num /= base;
 	}
 	if (value < 0 && base == 10)

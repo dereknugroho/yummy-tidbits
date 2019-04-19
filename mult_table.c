@@ -21,7 +21,7 @@ Usage:
 
 $ gcc -Wall -Wextra -Werror table_mult.c
 $ ./a.out 3
-$ 1 x 3 = 3
+  1 x 3 = 3
   2 x 3 = 6
   3 x 3 = 9
   4 x 3 = 12
@@ -59,7 +59,7 @@ int		main(int ac, char **av)
 	return (0);
 }
 
-// This is a custom atoi() function which implements some error checking
+// Custom atoi() implementation with specific error handling
 static int	my_atoi(char *s)
 {
 	int	num = 0;

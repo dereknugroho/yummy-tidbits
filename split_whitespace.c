@@ -38,6 +38,30 @@ Usage:
 
 $ gcc -Wall -Wextra -Werror split_whitespace.c
 $ ./a.out "This is fun"
+  Your original string:
+  
+  This
+  is
+  fun
+  
+  Word at str[0]: This
+  Char at str[0][0]: T (ascii 84)
+  Char at str[0][1]: h (ascii 104)
+  Char at str[0][2]: i (ascii 105)
+  Char at str[0][3]: s (ascii 115)
+  Char at str[0][4]:  (ascii 0)
+  
+  Word at str[1]: is
+  Char at str[1][0]: i (ascii 105)
+  Char at str[1][1]: s (ascii 115)
+  Char at str[1][2]:  (ascii 0)
+  
+  Word at str[2]: fun
+  Char at str[2][0]: f (ascii 102)
+  Char at str[2][1]: u (ascii 117)
+  Char at str[2][2]: n (ascii 110)
+  Char at str[2][3]:  (ascii 0) 
+$
 
 ################################################################################
 
