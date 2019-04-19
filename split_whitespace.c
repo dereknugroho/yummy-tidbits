@@ -27,17 +27,17 @@ fun
 
 ################################################################################
 
+Restrictions:
+	- The program takes a single string which must be contained in double
+	  quotes, otherwise there may be undefined behaviour (see usage)
+	- The following characters must be escaped: (", \, !)
+
+################################################################################
+
 Usage:
 
 $ gcc -Wall -Wextra -Werror split_whitespace.c
 $ ./a.out "This is fun"
-
-################################################################################
-
-Restrictions:
-	- The program takes a single string, and must be given in double quotes,
-	  otherwise there may be undefined behaviour (see usage)
-	- The following characters must be escaped: (", \, !)
 
 ################################################################################
 

@@ -47,7 +47,7 @@ static void	my_putchar(char c);
 
 int		main(int ac, char **av)
 {
-	// Handle errors
+	// Handle error: invalid number of arguments
 	if (ac != 2)
 	{
 		printf("Invalid number of arguments! Terminating program.\n");
@@ -80,12 +80,14 @@ static int	my_atoi(char *s)
 // Display the multiplication table
 static void	mult_table(int num)
 {
-	int	factor = 1;
+	long	factor = 1;
+	long	product;
 
-	// Check if products fit inside a 4-byte int
+	// Check if each product in multiplication table fits inside a 4-byte int
 	while (factor < 10)
 	{
-		if (num <= 0 || num >= 238609295)
+		product = factor * (long)num;
+		if (num <= 0 || product > 2147483647)
 		{
 			printf("Invalid argument! Terminating program.\n");
 			exit(1);
@@ -93,6 +95,8 @@ static void	mult_table(int num)
 		factor++;
 	}
 	factor = 1;
+
+	// Display the multiplication table
 	while (factor < 10)
 	{
 		display_int(factor);
