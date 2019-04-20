@@ -36,9 +36,9 @@ $
 
 */
 
-#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 static int	my_atoi(char *s);
 static void	mult_table(int num);
@@ -69,7 +69,7 @@ static int	my_atoi(char *s)
 		num = num * 10 + (*s - '0');
 		if ((*s < '0' || *s > '9') || (num < 0 || num > 2147483647))
 		{
-			printf("Invalid argument! Terminating program.\n");
+			printf("Invalid string! Terminating program.\n");
 			exit(1);
 		}
 		s++;
@@ -89,7 +89,7 @@ static void	mult_table(int num)
 		product = factor * (long)num;
 		if (num <= 0 || product > 2147483647)
 		{
-			printf("Invalid argument! Terminating program.\n");
+			printf("Invalid number! Terminating program.\n");
 			exit(1);
 		}
 		factor++;
@@ -114,7 +114,7 @@ static void	display_int(int num)
 {
 	if (num <= 0)
 	{
-		printf("Invalid argument! Terminating program.\n");
+		printf("Invalid number! Terminating program.\n");
 		exit(1);
 	}
 	if (num > 9)

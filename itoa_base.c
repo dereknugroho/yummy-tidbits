@@ -32,9 +32,9 @@ $
 
 */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <stdio.h>
 
 static char	*itoa_base(int value, int base);
 static int	valid_int(long num);

@@ -71,9 +71,9 @@ $
 #include <stdlib.h>
 #include <string.h>
 
-static int	is_space(char c);
-static int	word_count(char *s);
 static char	**split_whitespace(char *s);
+static int	word_count(char *s);
+static int	is_space(char c);
 
 int			main(int ac, char **av)
 {
@@ -116,32 +116,6 @@ int			main(int ac, char **av)
 	free(str);
 	str = NULL;
 	return (0);
-}
-
-// Determine if a character is whitespace
-static int	is_space(char c)
-{
-	return (c == ' ' || (c >= 9 && c <= 13));
-}
-
-// Count the number of words in a string
-static int	word_count(char *s)
-{
-	int	count = 0;
-	int	i = 0;
-
-	while (s[i])
-	{
-		if (is_space(s[i]))
-			i++;
-		else
-		{
-			count++;
-			while (s[i] && !is_space(s[i]))
-				i++;
-		}
-	}
-	return (count);
 }
 
 // Create a 2-d array that consists of the words in the given string
@@ -204,4 +178,30 @@ static char	**split_whitespace(char *s)
 
 	// Return the 2-d array
 	return (r);
+}
+
+// Count the number of words in a string
+static int	word_count(char *s)
+{
+	int	count = 0;
+	int	i = 0;
+
+	while (s[i])
+	{
+		if (is_space(s[i]))
+			i++;
+		else
+		{
+			count++;
+			while (s[i] && !is_space(s[i]))
+				i++;
+		}
+	}
+	return (count);
+}
+
+// Determine if a character is whitespace
+static int	is_space(char c)
+{
+	return (c == ' ' || (c >= 9 && c <= 13));
 }
