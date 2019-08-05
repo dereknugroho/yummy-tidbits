@@ -83,7 +83,6 @@ void	str_cap(char *s)
 			ft_putchar(s[i]);
 		i++;
 	}
-	// ft_putchar('\n');
 }
 
 int		is_space(char c)
@@ -105,27 +104,3 @@ void	ft_putchar(char c)
 {
 	write(1, &c, 1);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
