@@ -8,10 +8,10 @@ prime numbers less than or equal to it.
 ################################################################################
 
 Usage:
-$ gcc -Wall -Wextra -Werror add_prime_sum.c
-$ ./a.out 12
-  Sum of all primes less than or equal to 12:
-  28
+$ gcc -Wall -Wextra -Werror add_prime_sum.c -o ./add_prime_sum
+$ ./add_prime_sum
+  Enter a number:
+  Sum of primes less than or equal to :
 $
 
 ################################################################################
@@ -29,51 +29,25 @@ Restrictions:
 #include <stdlib.h>
 #include <unistd.h>
 
-static int	my_atoi(char *s);
-static long	prime_sum(int num);
-static int	is_prime(int num);
-static void	display_num(long num);
-static void	my_putchar(char c);
-static int	valid_int(long num);
+long	add_prime_sum(int num);
+int		is_prime(int num);
 
-int		main(int ac, char **av)
+int		main(void)
 {
-	// Handle error: invalid number of arguments
-	if (ac != 2)
-	{
-		printf("Invalid number of arguments! Terminating program.\n");
-		exit(1);
-	}
+	int	num = 0;
+	int	val = 0;
 
-	// Display sum of prime numbers
-	int		num = my_atoi(av[1]);
-	long	sum = prime_sum(num);
-
-	printf("Sum of primes less than or equal to %d:\n", num);
-	display_num(sum);
-	printf("\n");
+	printf("Enter a number: ");
+	scanf("%d", &num);
+	if (num < 0 || num > 225286)
+		return (printf("Invalid value! Terminating program."));
+	val = add_prime_sum(num);
+	printf("Sum of primes less than or equal to %d: %d\n", num, val);
 	return (0);
 }
 
-// Custom atoi() implementation with specific error handling
-static int	my_atoi(char *s)
-{
-	int	num = 0;
-
-	while (*s)
-	{
-		if ((*s < '0' || *s > '9') || (num < 0 || num > 2147483647))
-		{
-			printf("Invalid number! Terminating program.\n");
-			exit(1);
-		}
-		num = num * 10 + (*s++ - '0');
-	}
-	return (num);
-}
-
 // Calculate sum of all prime integers less than or equal to num
-static long	prime_sum(int num)
+long	add_prime_sum(int num)
 {
 	long	sum = 0;
 	while (num > 1)
@@ -86,7 +60,7 @@ static long	prime_sum(int num)
 }
 
 // Check whether a positive integer is a prime number
-static int	is_prime(int num)
+int		is_prime(int num)
 {
 	int	i = 2;
 
@@ -96,32 +70,4 @@ static int	is_prime(int num)
 		if (num % i++ == 0)
 			return (0);
 	return (1);
-}
-
-// Display a long
-static void	display_num(long num)
-{
-	// Handle error: num does not fit in a 4-byte integer
-	if (!valid_int(num))
-	{
-		printf("Sum is too large! Max arg: 225286. Terminating program.\n");
-		exit(1);
-	}
-	
-	// Display the long
-	if (num > 9)
-		display_num(num / 10);
-	my_putchar(num % 10 + '0');
-}
-
-// Check if the value fits inside a 4-byte integer
-static int	valid_int(long num)
-{
-	return (num >= -2147483648 && num <= 2147483647);
-}
-
-// Display a char
-static void	my_putchar(char c)
-{
-	write(1, &c, 1);
 }
