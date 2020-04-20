@@ -17,6 +17,7 @@
 
 void	mult_table(int num);
 
+// Entry point
 int		main(void)
 {
   int num = 0;

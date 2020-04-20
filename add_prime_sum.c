@@ -18,11 +18,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int   add_prime_sum(int num);
-int		is_prime(int num);
+int add_prime_sum(int num);
+int is_prime(int num);
 
 // Entry point
-int		main(void)
+int main(void)
 {
 	int	num = 0;
 	int	val = 0;
@@ -37,7 +37,7 @@ int		main(void)
 }
 
 // Calculate sum of all prime integers less than or equal to num
-int   add_prime_sum(int num)
+int add_prime_sum(int num)
 {
 	long	sum = 0;
 	while (num > 1)
@@ -50,7 +50,7 @@ int   add_prime_sum(int num)
 }
 
 // Check whether a positive integer is a prime number
-int		is_prime(int num)
+int is_prime(int num)
 {
 	int	i = 2;
 
