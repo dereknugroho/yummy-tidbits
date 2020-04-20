@@ -1,28 +1,17 @@
 /*
-
-################################################################################
-
-This is a program that takes a non-negative int and displays the sum of all
-prime numbers less than or equal to it.
-
-################################################################################
-
-Usage:
-$ gcc -Wall -Wextra -Werror add_prime_sum.c -o ./add_prime_sum
-$ ./add_prime_sum
-  Enter a number:
-  Sum of primes less than or equal to :
-$
-
-################################################################################
-
-Restrictions:
-	- The program takes a single non-negative int whose sum of primes does not
-	  exceed the maximum value that fits in a 4-byte integer (i.e. the largest
-	  value that the program can take is 225286)
-
-################################################################################
-
+**
+**  This program takes a non-negative integer and displays
+**  the sum of all prime numbers less than or equal to it.
+**
+**  Usage:
+**  $ gcc add_prime_sum.c -o yummy; ./yummy
+**
+**  Restriction:
+**  - The program takes a single non-negative int whose
+**    sum of primes does not exceed the maximum value
+**    that fits in a 4-byte integer (i.e. the largest
+**	  value that you can give the program is 225286)
+**
 */
 
 #include <stdio.h>
@@ -32,6 +21,7 @@ Restrictions:
 long	add_prime_sum(int num);
 int		is_prime(int num);
 
+// Entry point to program
 int		main(void)
 {
 	int	num = 0;
