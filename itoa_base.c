@@ -52,7 +52,7 @@ int			main(void)
 	return (0);
 }
 
-static char	*itoa_base(int value, int base)
+char	*itoa_base(int value, int base)
 {
 	char	*ret = "";
 	int		num = value;
