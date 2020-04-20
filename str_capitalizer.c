@@ -1,63 +1,52 @@
 /*
-
-################################################################################
-
-This is a program that takes one or more strings and for each string,
-displays the entire string with the first letter of each word capitalized,
-with the rest of the word in lowercase, assuming it is an alphabetical
-character. Additionally, leading and trailing whitespace is removed from
-each string, and whitespace between each word is forced to be a single
-space
-
-################################################################################
-
-Usage:
-$ gcc -Wall -Wextra -Werror str_capitalizer.c
-$ ./a.out "  hEllo!!!42xd     w0rLD...   "
-  Hello!!!42xd w0rld...
-$
-
-################################################################################
-
-Restrictions:
-	- The program must take at least a single argument
-
+**
+**  This program takes a string and displays it with the first letter
+**  of each word capitalized and the rest of the word in lowercase.
+**  Leading and trailing whitespace is removed and whitespace between
+**  each word is forced to be a single space.
+**
+**  Usage:
+**  $ gcc str_capitalizer.c -o yummy; ./yummy
+**
 */
 
 #include <stdio.h>
-#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
 
 void	str_cap(char *str);
 int		is_space(char c);
 int		is_upper(char c);
 int		is_lower(char c);
-void	ft_putchar(char c);
 
-int		main(int ac, char **av)
+int		main(void)
 {
-	int	i = 1;
+  int   i = 0;
+  int   j = 0;
+  char  *user_string = (char *)malloc(1024);
 
-	if (ac != 1)
-		while (av[i])
-			str_cap(av[i++]);
-	write(1, "\n", 1);
-	return (0);
+  printf("Please enter a string that contains 1023 characters or less: ");
+  fgets(user_string, 1024, stdin);
+
+  // Validate input
+  if (strlen(user_string) > 1023)
+    return (printf("Your string was too long!\n"));
+  if (strlen(user_string) == 1)
+    return (printf("You didn't enter anything!\n"));
+
+  while (i < strlen(user_string)) {
+    if (is_space(user_string[i]))
+      j++;
+    if (j == strlen(user_string))
+      return (printf("There weren't any words in your string!\n"));
+    i++;
+  }
+
+  // Display output
+  printf("Here is your modified string: ");
+  str_cap(user_string);
+  return (0);
 }
-
-/*
-
-1. Display original uppercase letter
-	- First letter of string
-	- First letter of a word
-2. Display original lowercase letter
-	- Not the first letter of a word
-3. Display a forced uppercase letter
-	- Lowercase first letter of a word
-4. Display a forced lowercase letter
-	- Uppercase non-first letter of a word
-5. Display a non-alphabetical character
-
-*/
 
 void	str_cap(char *s)
 {
@@ -67,20 +56,20 @@ void	str_cap(char *s)
 		i++;
 	while (s[i])
 	{
-		// 1. Display original uppercase letter
+		// Display original uppercase letter
 		if (is_upper(s[i]) && (i == 0 || is_space(s[i - 1])))
-			ft_putchar(s[i]);
-		// 2. Display original lowercase letter
+      printf("%c", s[i]);
+		// Display original lowercase letter
 		else if (is_lower(s[i]) && (i != 0 && !is_space(s[i - 1])))
-			ft_putchar(s[i]);
-		// 3. Display a forced uppercase letter
+			printf("%c", s[i]);
+		// Display a forced uppercase letter
 		else if (is_lower(s[i]) && (i == 0 || is_space(s[i - 1])))
-			ft_putchar(s[i] - 32);
-		// 4. Display a forced lowercase letter
+			printf("%c", s[i] - 32);
+		// Display a forced lowercase letter
 		else if (is_upper(s[i]) && (i != 0 && !is_space(s[i - 1])))
-			ft_putchar(s[i] + 32);
+			printf("%c", s[i] + 32);
 		else
-			ft_putchar(s[i]);
+      printf("%c", s[i]);
 		i++;
 	}
 }
@@ -98,9 +87,4 @@ int		is_upper(char c)
 int		is_lower(char c)
 {
 	return (c >= 'a' && c <= 'z');
-}
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
 }

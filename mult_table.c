@@ -6,11 +6,6 @@
 **  Usage:
 **  $ gcc mult_table.c -o yummy; ./yummy
 **
-**  Restrictions:
-**  - The product of the argument multiplied by any int between
-**    1 and 9 (inclusive) cannot exceed the maximum value that
-**    fits in a 4-byte int (2147483647)
-**
 */
 
 #include <stdio.h>
@@ -26,7 +21,7 @@ int		main(void)
   scanf("%d", &num);
 
   if (num < 1 || num > 268435455)
-    return (printf("Invalid value! Terminating program.\n"));
+    return (printf("Number outside of valid range! Terminating program.\n"));
 
   printf("Multiplication table for %d:\n", num);
   mult_table(num);

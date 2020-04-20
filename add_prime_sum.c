@@ -6,12 +6,6 @@
 **  Usage:
 **  $ gcc add_prime_sum.c -o yummy; ./yummy
 **
-**  Restrictions:
-**  - The program takes a single non-negative int whose
-**    sum of primes does not exceed the maximum value
-**    that fits in a 4-byte integer (i.e. the largest
-**	  value that you can give the program is 225286)
-**
 */
 
 #include <stdio.h>
@@ -30,7 +24,7 @@ int main(void)
 	printf("Enter any number between 0 and 225286 (inclusive): ");
 	scanf("%d", &num);
 	if (num < 0 || num > 225286)
-		return (printf("Invalid value! Terminating program.\n"));
+		return (printf("Number outside of valid range! Terminating program.\n"));
 	val = add_prime_sum(num);
 	printf("Sum of primes less than or equal to %d: %d\n", num, val);
 	return (0);

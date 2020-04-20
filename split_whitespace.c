@@ -5,9 +5,6 @@
 **  Usage:
 **  $ gcc split_whitespace.c -o yummy; ./yummy
 **
-**  Restrictions:
-**  - The program takes a string that contains 1023 characters or less.
-**
 */
 
 #include <stdio.h>
@@ -15,10 +12,10 @@
 #include <string.h>
 
 char	**split_whitespace(char *s);
-int	word_count(char *s);
-int	is_space(char c);
+int   word_count(char *s);
+int   is_space(char c);
 
-int			main(void)
+int   main(void)
 {
   int   i = 0;
   int   j = 0;
@@ -121,7 +118,7 @@ char	**split_whitespace(char *s)
 }
 
 // Count the number of words in a string
-int	word_count(char *s)
+int   word_count(char *s)
 {
 	int	count = 0;
 	int	i = 0;
@@ -141,7 +138,7 @@ int	word_count(char *s)
 }
 
 // Determine if a character is whitespace
-int	is_space(char c)
+int   is_space(char c)
 {
 	return (c == ' ' || (c >= 9 && c <= 13));
 }
