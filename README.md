@@ -10,7 +10,7 @@ Here is how you would compile and run a program:
 $ gcc [filename] -o yummy; ./yummy
 ```
 
-i.e.,
+i.e.
 
 ```
 $ gcc split_whitespace.c -o yummy; ./yummy
