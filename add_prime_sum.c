@@ -6,7 +6,7 @@
 **  Usage:
 **  $ gcc add_prime_sum.c -o yummy; ./yummy
 **
-**  Restriction:
+**  Restrictions:
 **  - The program takes a single non-negative int whose
 **    sum of primes does not exceed the maximum value
 **    that fits in a 4-byte integer (i.e. the largest

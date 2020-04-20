@@ -1,125 +1,72 @@
 /*
-
-################################################################################
-
-This is a program that takes a string and saves an array of its words. The
-words are then displayed to the standard output. A word is a series of
-characters separated by whitespace or by the start or end of the string.
-
-For example:
-
-Given the string "This is fun", the program will create this array:
-
-["This", "is", "fun", NULL]
-
-In the example above, each element is also an array (since a string is just
-a null-terminated array of chars), so the parent array actually looks like this:
-
-[['T', 'h', 'i', 's', '\0'], ['i', 's', '\0'], ['f', 'u', 'n', '\0']]
-
-...and the child array at index 0 of the parent array looks like this:
-['T', 'h', 'i', 's', '\0']
-
-The program will then output the following:
-This
-is
-fun
-
-################################################################################
-
-Restrictions:
-	- The program takes a single string which must be contained in double
-	  quotes, otherwise there may be undefined behaviour (see usage)
-	- The following characters must be escaped: (", \, !)
-
-################################################################################
-
-Usage:
-
-$ gcc -Wall -Wextra -Werror split_whitespace.c
-$ ./a.out "This is fun"
-  Your original string:
-  
-  This
-  is
-  fun
-  
-  Word at str[0]: This
-  Char at str[0][0]: T (ascii 84)
-  Char at str[0][1]: h (ascii 104)
-  Char at str[0][2]: i (ascii 105)
-  Char at str[0][3]: s (ascii 115)
-  Char at str[0][4]:  (ascii 0)
-  
-  Word at str[1]: is
-  Char at str[1][0]: i (ascii 105)
-  Char at str[1][1]: s (ascii 115)
-  Char at str[1][2]:  (ascii 0)
-  
-  Word at str[2]: fun
-  Char at str[2][0]: f (ascii 102)
-  Char at str[2][1]: u (ascii 117)
-  Char at str[2][2]: n (ascii 110)
-  Char at str[2][3]:  (ascii 0) 
-$
-
-################################################################################
-
+**
+**  This is a program that takes a string and returns an array of its words.
+**
+**  Usage:
+**  $ gcc split_whitespace.c -o yummy; ./yummy
+**
+**  Restrictions:
+**  - The program takes a string that contains 1023 characters or less.
+**
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-static char	**split_whitespace(char *s);
-static int	word_count(char *s);
-static int	is_space(char c);
+char	**split_whitespace(char *s);
+int	word_count(char *s);
+int	is_space(char c);
 
-int			main(int ac, char **av)
+int			main(void)
 {
-	// Handle errors
-	if (ac != 2)
-	{
-		printf("Invalid number of arguments! Terminating program.\n");
-		exit(1);
-	}
+  int   i = 0;
+  int   j = 0;
+  char  *user_string = (char *)malloc(1024);
 
-	// Organize variables
-	char	**str = split_whitespace(av[1]);
-	int		i = 0;
-	size_t	j;
+  printf("Please enter a string that contains 1023 characters or less: ");
+  fgets(user_string, 1024, stdin);
 
-	// Display info to user
-	printf("Your original string:\n\n");
-	while (i < word_count(av[1]))
+  // Validate input
+  if (strlen(user_string) > 1023)
+    return (printf("Your string was too long!\n"));
+  if (strlen(user_string) == 1)
+    return (printf("You didn't enter anything!\n"));
+
+  while (i < strlen(user_string)) {
+    if (is_space(user_string[i]))
+      j++;
+    if (j == strlen(user_string))
+      return (printf("There weren't any words in your string!\n"));
+    i++;
+  }
+
+  // Display output
+  char  **split_string = split_whitespace(user_string);
+  i = 0;
+  j = 0;
+
+  printf("\nHere is your array of words:\n\n");
+	while (i < word_count(user_string))
 	{
-		printf("%s\n", str[i]);
-		i++;
-	}
-	i = 0;
-	printf("\n");
-	while (i < word_count(av[1]))
-	{
-		printf("Word at str[%d]: %s\n", i, str[i]);
+		printf("Word at index [%d]: %s\n--------------------------\n", i, split_string[i]);
 		j = 0;
-		while (j <= strlen(str[i]))
+		while (j <= strlen(split_string[i]))
 		{
-			printf("Char at str[%d][%zu]: %c (ascii %d)\n", i, j, str[i][j],
-				str[i][j]);
+      if (j == strlen(split_string[i]))
+        printf("Char at index [%d][%d]: NULL\n", i, j);
+      else
+			  printf("Char at index [%d][%d]: %c\n", i, j, split_string[i][j]);
 			j++;
 		}
 		i++;
 		printf("\n");
 	}
-
-	// Ensure no leaks before ending program
-	free(str);
-	str = NULL;
 	return (0);
 }
 
 // Create a 2-d array that consists of the words in the given string
-static char	**split_whitespace(char *s)
+char	**split_whitespace(char *s)
 {
 	int		i = 0;
 	int		j = 0;
@@ -127,13 +74,6 @@ static char	**split_whitespace(char *s)
 	int		temp = 0;
 	int		word_len;
 	char	**r;
-
-	// Handle edge case where s is an empty string or only whitespace
-	if (!s || !*s)
-	{
-		printf("Invalid string! Terminating program.\n");
-		exit(1);
-	}
 
 	// Allocate memory for parent array
 	if (!(r = (char **)malloc(sizeof(char *) * (word_count(s) + 1))))
@@ -152,7 +92,7 @@ static char	**split_whitespace(char *s)
 			temp++;
 		}
 
-		// Determine the length of the newly-encountered word
+		// Determine the length of the next word
 		while (s[i] && !is_space(s[i]))
 		{
 			i++;
@@ -181,7 +121,7 @@ static char	**split_whitespace(char *s)
 }
 
 // Count the number of words in a string
-static int	word_count(char *s)
+int	word_count(char *s)
 {
 	int	count = 0;
 	int	i = 0;
@@ -201,7 +141,7 @@ static int	word_count(char *s)
 }
 
 // Determine if a character is whitespace
-static int	is_space(char c)
+int	is_space(char c)
 {
 	return (c == ' ' || (c >= 9 && c <= 13));
 }
