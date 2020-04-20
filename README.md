@@ -11,8 +11,8 @@ git clone https://github.com/dereknugroho/yummy-tidbits.git yummy-tidbits
 Specific usage for each program is described in its file but it generally goes something like this:
 
 ```
-$ gcc -Wall -Wextra -Werror filename.c
-$ ./a.out arg1 [...] | cat -e
+$ gcc -Wall -Wextra -Werror filename.c -o yummy
+$ ./yummy arg1 [...] | cat -e
 ```
 
 These programs contain approximate solutions to various Level 3+ exam questions at [42 SV](https://www.42.us.org/).
