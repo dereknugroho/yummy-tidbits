@@ -4,8 +4,14 @@
 
 Each file is a complete program.
 
-Here is an example of how to compile and run a program:
+Here is how you would compile and run a program:
 
 ```
-$ gcc itoa_base.c -o yummy; ./yummy
+$ gcc [filename] -o yummy; ./yummy
+```
+
+i.e.,
+
+```
+$ gcc split_whitespace.c -o yummy; ./yummy
 ```
